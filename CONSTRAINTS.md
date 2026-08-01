@@ -55,6 +55,18 @@ If the framework is missing, unreadable, ambiguous for the requested work, or ap
 
 STABLE compliance is not satisfied by merely mentioning the framework. Evidence must demonstrate that its prescribed actions were performed.
 
+## 2.1 Approved UI mockup constraint
+
+All marketing-site, public-app, mobile, design-system, and administration UI work **MUST use** this approved visual reference:
+
+```text
+docs/design/nyavista-ui-mockup-light-dark.png
+```
+
+Before UI coding, the applicable panels MUST be inspected and named in the feature tracker card. During implementation, their visual hierarchy and shared system MUST guide tokens and components. During review, both themes and applicable breakpoints MUST be compared with the image and supported by recorded evidence.
+
+The mockup MUST NOT override written product behavior, STABLE, accessibility, security, content rights, localization, responsive usability, or truthful data requirements. Generated placeholder text, metrics, images, and incidental details MUST NOT be treated as verified production content.
+
 ## 3. Product identity and geographic neutrality
 
 - NyaVista MUST be identified as a proprietary product of **E-DEAL EXPRESS LLC**, a United States company.
@@ -159,6 +171,13 @@ STABLE compliance is not satisfied by merely mentioning the framework. Evidence 
 - Country sections MUST be configurable/personalized, not permanently hardcoded for every user.
 - Critical actions require clear confirmation and recovery where feasible.
 - Dark/light themes, reduced motion, variable bandwidth, and unavailable media MUST be handled gracefully.
+- The approved mockup MUST be implemented through centralized semantic tokens and reusable components, not scattered copied color values or one-off screen styling.
+- Light and dark themes MUST preserve the reference's shared identity while receiving theme-appropriate contrast, surfaces, elevation, imagery treatment, charts, focus states, and media controls.
+- Marketing, feed, story, mobile video/feed, and admin surfaces MUST remain visually coherent with their corresponding reference panels.
+- Typography, spacing, radii, borders, elevation, chips, buttons, status badges, cards, source markers, and media controls MUST be checked against the reference.
+- The presentation board's proportions MUST NOT be forced onto real viewports. Responsive and localization-driven adaptations are required and must be documented.
+- Intentional deviations MUST be recorded in `PRODUCT_TRACKER.md` with a reason and approval.
+- Visual review evidence MUST avoid exposing secrets, private user data, or restricted content.
 
 ## 11. Accessibility constraints
 
@@ -168,6 +187,7 @@ STABLE compliance is not satisfied by merely mentioning the framework. Evidence 
 - Audio/video controls MUST be keyboard and screen-reader accessible.
 - New UI features require automated checks plus relevant manual keyboard/screen-reader review.
 - Unresolved critical accessibility defects block release.
+- When accessibility and the mockup conflict, accessibility takes precedence; the adaptation MUST preserve the design intent and be documented.
 
 ## 12. Internationalization and geographic-fairness constraints
 
@@ -196,6 +216,7 @@ STABLE compliance is not satisfied by merely mentioning the framework. Evidence 
 - A failing required test MUST NOT be hidden, deleted, weakened, or skipped merely to pass CI.
 - Test fixtures MUST be fictional or legally permitted and MUST NOT contain production secrets or personal data.
 - “Done” requires commands and results recorded in `PRODUCT_TRACKER.md`.
+- UI changes require visual comparison evidence for the applicable mockup panels, both themes, and relevant breakpoints. Critical visual regression, theme drift, overflow, or unreadable density blocks completion.
 
 ## 15. Documentation and tracker constraints
 
@@ -233,6 +254,8 @@ MODE: ANALYZE | IMPLEMENT | REVIEW | FIX | ROLLBACK
 REQUESTED OUTCOME:
 APPROVED PHASE / TRACKER ID:
 ROOT STABLE FRAMEWORK PATH + VERSION:
+APPROVED UI MOCKUP PANEL(S):
+THEMES / BREAKPOINTS TO VERIFY:
 STABLE STEPS APPLICABLE:
 REPOSITORY / WORKTREE STATE:
 FILES EXPECTED TO CHANGE:
@@ -247,6 +270,7 @@ Every completion report MUST include:
 ```text
 OUTCOME:
 STABLE EVIDENCE:
+MOCKUP COMPARISON EVIDENCE / DEVIATIONS:
 FILES CREATED / MODIFIED:
 BEHAVIOR IMPLEMENTED:
 ACCEPTANCE RESULTS:
@@ -280,4 +304,3 @@ NEXT APPROVAL REQUIRED:
 ```
 
 An exception is invalid until approved and recorded. STABLE requirements may only be varied if the STABLE framework itself permits it and the required authority approves the variation.
-

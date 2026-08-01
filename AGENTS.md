@@ -16,6 +16,14 @@ Before planning or changing implementation files, read completely:
 4. `PRODUCT_TRACKER.md`;
 5. the README and any instructions or architecture decisions applicable to the files being changed.
 
+For any user-interface task, also inspect:
+
+```text
+docs/design/nyavista-ui-mockup-light-dark.png
+```
+
+This is the approved visual reference for the marketing site, public application, mobile feed/video, editorial dashboard, and shared light/dark design system.
+
 If the root STABLE framework cannot be located or read, implementation is blocked. Do not guess its rules. Read-only inspection and a blocker report are allowed.
 
 ## Mandatory STABLE lifecycle
@@ -28,6 +36,8 @@ Every feature and functionality must follow STABLE:
 
 Mentioning STABLE without performing and recording its required actions is not compliance.
 
+For UI work, the STABLE lifecycle must include the applicable mockup panels in Scope/Think, visual and responsive risks in Assess Risk, token/component reuse in Build, light/dark and breakpoint comparison in Validate, and documented deviations in Evolve.
+
 ## Operating rules
 
 - Work one approved phase or tracker item at a time.
@@ -38,6 +48,7 @@ Mentioning STABLE without performing and recording its required actions is not c
 - When credentials are unavailable, create a provider interface, validated configuration, mock/fallback, failure state, and setup documentation.
 - Do not deploy, publish, purchase services, change external systems, or perform destructive operations without the required authority.
 - Use `apply_patch` for manual repository edits where supported.
+- Treat the approved mockup as visual direction, not as verified production data or a replacement for written behavior.
 
 ## Product and editorial rules
 
@@ -58,6 +69,9 @@ Mentioning STABLE without performing and recording its required actions is not c
 - Keep external AI, ingestion, media, search, translation, and recommendation services provider-neutral.
 - Never expose server credentials or commit secrets, private data, unauthorized content, build outputs, or dependency directories.
 - Preserve locale, timezone, country, region, accessibility, responsive, loading, error, empty, retry, and degraded-provider behavior.
+- Implement the mockup through semantic design tokens and reusable components. Do not scatter sampled values or build isolated theme-specific copies.
+- Compare applicable UI in light and dark themes and at relevant mobile, tablet, desktop, and large-desktop breakpoints.
+- Document accessibility-, localization-, responsiveness-, browser-, or feasibility-driven visual deviations in the tracker.
 - Do not mix Firebase and Supabase without an approved architecture decision.
 
 ## Verification requirements
@@ -70,6 +84,8 @@ Run the repository-defined versions of:
 - permission and Firebase Rules tests where applicable;
 - accessibility checks appropriate to the change;
 - production build.
+
+UI changes also require visual-regression or screenshot evidence against `docs/design/nyavista-ui-mockup-light-dark.png`. The mockup never overrides WCAG requirements, source transparency, content rights, security, or truthful data.
 
 Do not delete, weaken, hide, or skip a required failing test simply to make validation pass.
 
@@ -84,6 +100,7 @@ Update `PRODUCT_TRACKER.md` with:
 - tests and build results;
 - security, editorial, legal, accessibility, localization, and geographic-fairness notes;
 - mock versus live status;
+- mockup panels used, visual comparison evidence, themes/breakpoints checked, and intentional deviations;
 - risks, limitations, migration, and rollback;
 - recommended commit or PR.
 
@@ -98,6 +115,8 @@ OUTCOME:
 TRACKER ID / PHASE:
 STABLE FRAMEWORK REFERENCE:
 STABLE EVIDENCE:
+APPROVED MOCKUP PANEL(S):
+VISUAL COMPARISON / DEVIATIONS:
 FILES CREATED / MODIFIED:
 FEATURES IMPLEMENTED:
 ACCEPTANCE RESULTS:
@@ -111,4 +130,3 @@ MIGRATION / ROLLBACK:
 RECOMMENDED COMMIT:
 NEXT APPROVAL REQUIRED:
 ```
-
