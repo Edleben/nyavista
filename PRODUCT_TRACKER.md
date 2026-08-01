@@ -21,20 +21,20 @@ This file is the delivery source of truth. Update it after evidence exists, not 
 |---|---|
 | Product | NyaVista |
 | Owner | E-DEAL EXPRESS LLC |
-| Current phase | Phase 0 |
-| Overall status | NOT_STARTED |
+| Current phase | Phase 0 audit + approved Phase 1 first-pass foundation |
+| Overall status | IN_PROGRESS |
 | Release target | TBD |
 | Release owner | TBD |
-| Last updated | YYYY-MM-DD |
-| Updated by | Name/agent |
-| STABLE framework path/version | Locate at repository root / record exact reference |
+| Last updated | 2026-08-01 |
+| Updated by | Codex |
+| STABLE framework path/version | `STABLE_FRAMEWORK.md` at repository root, commit `f8ab99e` |
 | Approved visual reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
 | Visual baseline status | APPROVED_REFERENCE |
-| Highest open risk | TBD |
-| Build | NOT_RUN |
-| Tests | NOT_RUN |
+| Highest open risk | First pass is demo-only; persistence, authentication, ingestion, AI, and publishing are not live |
+| Build | PASS — `vinext build` (2026-08-01) |
+| Tests | PASS — 2/2 rendered-shell and delivery-record tests (2026-08-01) |
 | Security review | NOT_STARTED |
-| Accessibility review | NOT_STARTED |
+| Accessibility review | IN_REVIEW — semantic DOM, keyboard focus, responsive navigation, reduced motion |
 | Legal/editorial review | NOT_STARTED |
 
 ## Phase tracker
@@ -63,6 +63,7 @@ Create one row per independently testable outcome. Split rows that require diffe
 
 | ID | Phase | Epic/feature | Priority | Status | Owner | STABLE evidence | Acceptance criteria | Tests/evidence | Risk | Dependencies | Docs | Commit/PR |
 |---|---:|---|---|---|---|---|---|---|---|---|---|---|
+| F-015 | 1 | Living sprint tracker and agent handoff foundation | P0 | IN_REVIEW | Codex | Root STABLE and all approved mockup panels inspected; responsive light/dark comparison complete | Sprint phases, completion visualisation, polling timestamp, implementation steps, and cross-agent handoff are visible and documented | Lint, TypeScript, 2 tests, production build, desktop/mobile browser review PASS | HIGH | F-000, F-001, F-011 | `CLAUDE_HANDOFF.md`, tracker UI | Working tree |
 | F-000 | 0 | Locate and map root STABLE framework | P0 | NOT_STARTED | — | — | Complete framework read; workflow mapped; no invented rules | Path/version and review note | CRITICAL | Repository access | Constraints/specs | — |
 | F-001 | 0 | Repository audit | P0 | NOT_STARTED | — | — | Current architecture, changes, dependencies and gaps documented | Audit report | HIGH | F-000 | Architecture | — |
 | F-010 | 1 | Central brand/company configuration | P0 | NOT_STARTED | — | — | US ownership and global positioning have one source of truth | Unit/render checks | MEDIUM | F-001 | Brand/ownership | — |
@@ -150,6 +151,43 @@ Copy this section for each feature.
 - Commit/PR:
 - Reviewer/approval/date:
 ```
+
+### F-015 Living sprint tracker and agent handoff foundation
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P0 / HIGH
+- Status: IN_REVIEW
+- Requested outcome: first-pass app shell, MVP-important demo surfaces, organic sprint tracker UI, and living cross-agent handoff.
+- In scope: semantic product configuration, shared design tokens, light/dark responsive shell, demo briefing, editorial overview, visual sprint phases, completion rates, polling interaction, implementation steps, and documentation.
+- Out of scope: live markdown parsing, database persistence, authentication, ingestion, AI providers, real news, publishing, deployment, and progression into another delivery phase.
+
+#### STABLE record
+
+- Framework path and version/commit: `STABLE_FRAMEWORK.md`, repository commit `f8ab99e`.
+- Pre-coding: required documents and approved mockup read; clean documentation-only baseline confirmed; scope, mock/live boundary, visual risks, acceptance criteria, tests, and rollback recorded before app implementation.
+- Build: centralized product identity in `lib/product.ts`; semantic tokens and reusable visual patterns; truthful demo labels; keyboard focus; reduced-motion support; responsive mobile navigation.
+- Review: marketing, feed/story hierarchy, mobile character, editorial dashboard, and design-system panels compared in light and dark at desktop and 390×844 mobile viewport.
+- Visual comparison: calm editorial hierarchy, serif/sans pairing, 12–18px card language, restrained indigo/violet/gold accents, compact dashboard density, source/AI status treatments, and theme-specific surfaces align with the approved direction.
+- Intentional deviations: abstract CSS artwork replaces generated mockup photography to avoid unlicensed media; multiple product panels are consolidated into one first-pass workspace; real viewport layouts replace presentation-board proportions; charts and counts are explicitly fictional planning data.
+
+#### Acceptance and verification
+
+- [x] Responsive app shell and three navigable first-pass surfaces.
+- [x] Tracker organised by sprint phase with completion bars, selected-sprint ring, implementation steps, polling status, and agent pulse.
+- [x] Living `CLAUDE_HANDOFF.md` created with ownership, evidence, risks, rollback, queue, and update template.
+- [x] Light/dark theme interaction, desktop and mobile responsive review, semantic DOM snapshot, and browser console review (no warnings/errors).
+- [x] Lint: PASS — ESLint, 2026-08-01.
+- [x] Type check: PASS — strict TypeScript `--noEmit`, 2026-08-01.
+- [x] Tests: PASS — 2/2 Node rendered-shell/documentation tests, 2026-08-01.
+- [x] Production build: PASS — vinext/Vite, 2026-08-01.
+- [ ] Automated accessibility scanner and screen-reader manual pass — deferred to F-013/Phase 13 workflow; semantic and keyboard-focused review completed.
+- [ ] Live markdown synchronisation — deliberately deferred; the current UI states that it is a planning snapshot.
+
+- Security/rights/editorial: no credentials, external calls, publisher marks, real reports, or publishing capabilities. All demo content and operational metrics are visibly fictional/non-live.
+- Accessibility/i18n/geographic fairness: WCAG-oriented semantics, focus, reduced motion, touch-sized controls, responsive layout; English copy only; geography visual explicitly separates commercial priority from editorial importance.
+- Migration/rollback: no data migration. Roll back by removing the generated application scaffold and reverting this tracker/handoff entry.
+- Next approval required: Phase 1 review or explicit approval for a named next tracker item; do not automatically advance to Phase 2, 3, or 5.
 
 ## Risk register
 
