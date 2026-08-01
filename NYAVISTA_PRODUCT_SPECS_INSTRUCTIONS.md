@@ -11,6 +11,26 @@ Agents must use this document together with:
 - the **STABLE framework located at the repository root** — mandatory workflow for every feature and functionality.
 - repository-level `AGENTS.md`, README files, architecture decisions, and local instructions.
 
+## 1.1 Approved visual reference
+
+The approved cross-product visual baseline is:
+
+```text
+docs/design/nyavista-ui-mockup-light-dark.png
+```
+
+It guides implementation of the public marketing site, public news application, mobile experiences, editorial administration dashboard, and shared light/dark design system. It depicts:
+
+- marketing homepage;
+- desktop news home feed;
+- desktop story detail;
+- vertical mobile video experience;
+- personalized mobile feed;
+- editorial administration dashboard;
+- color, typography, chip, button, badge, card, and media-control patterns.
+
+Agents and designers must inspect this image before implementing or reviewing user-interface work. The mockup is a visual direction and consistency baseline, not a substitute for functional requirements, content rights, accessibility, responsive behavior, localization, or tested interaction specifications. Where the image and written requirements appear to conflict, preserve the written requirements and record the visual adaptation in `PRODUCT_TRACKER.md`.
+
 If instructions conflict, follow the most specific higher-authority instruction and record the conflict. Never invent missing STABLE rules. If the STABLE framework cannot be found or read completely, stop before implementation and report the blocker.
 
 ## 2. Agent operating protocol
@@ -41,6 +61,8 @@ At completion:
 4. Update `PRODUCT_TRACKER.md` with evidence, not estimates presented as facts.
 5. Report files changed, validation results, risks, limitations, migrations, and a recommended commit.
 6. Stop at the phase gate and wait for approval.
+
+For UI work, completion also requires a visual comparison against `docs/design/nyavista-ui-mockup-light-dark.png` in both themes at the applicable desktop and mobile breakpoints. Record screenshots, deviations, and accessibility-driven adaptations in the tracker.
 
 Accepted control commands:
 
@@ -174,6 +196,8 @@ Recommended routes:
 
 ## 8. UX requirements
 
+Use `docs/design/nyavista-ui-mockup-light-dark.png` as the primary visual reference for layout hierarchy, density, spacing, component character, theme treatment, and the relationship between marketing, public product, mobile, and administration experiences.
+
 Home must provide a personalized mix of top stories, latest coverage, selected countries/regions, subjects, most watched, and editorial context picks. Story cards show geography where relevant, category, headline, short summary, why-it-matters preview, source count, time, reading time, media indicators, bookmark/share actions, and AI-assisted disclosure.
 
 Story pages include Overview, Sources, Timeline, Video, and Audio views; publication/update dates; affected geographies; key points; context; next developments; source comparisons; original links; corrections; and related coverage.
@@ -181,6 +205,26 @@ Story pages include Overview, Sources, Timeline, Video, and Audio views; publica
 Search supports keyword, category, topic, country, region, source, language, date, and format filters. Personalization settings must always be reversible.
 
 Build an original interface. Do not clone another news or social product. Support light/dark themes, responsive layouts, loading/error/empty/offline states, reduced motion, and resilient media fallbacks.
+
+### Visual implementation rules
+
+- Implement design tokens rather than sampling and duplicating values throughout components.
+- Preserve the mockup's calm editorial hierarchy, restrained depth, 12px-style card language, minimal borders, strong content grouping, and controlled indigo/violet/gold accents.
+- Provide true theme-specific styling; dark mode must not be a mechanical color inversion.
+- Use the mockup's serif/sans editorial pairing as direction while ensuring font licensing, performance, language coverage, and fallbacks.
+- Preserve visible source counts, AI-assisted disclosures, correction/status treatments, captions, media controls, and operational risk labels.
+- Adapt layouts cleanly at unsupported dimensions instead of forcing the presentation-board proportions.
+- Do not copy incidental generated placeholder text, fictional numbers, imagery, or data from the mockup into production as factual content.
+- Any intentional visual deviation must state its reason: accessibility, responsiveness, localization, browser behavior, implementation feasibility, or an approved product decision.
+
+### Required visual QA
+
+- [ ] Marketing, news feed, story detail, mobile feed/video, and admin implementations are compared with the applicable mockup panel.
+- [ ] Light and dark themes are reviewed independently.
+- [ ] Mobile, tablet, desktop, and large-desktop layouts have no overflow or clipped controls.
+- [ ] Typography, spacing, radii, borders, elevation, iconography, and states use shared tokens/components.
+- [ ] Keyboard focus, contrast, reduced motion, captions, touch targets, and no-color-only states remain compliant.
+- [ ] Screenshots or browser-test artifacts and approved deviations are recorded in `PRODUCT_TRACKER.md`.
 
 ## 9. Recommended architecture
 
@@ -319,6 +363,8 @@ Display: **Demo content — not live reporting.** Never use real publisher marks
 | 13 | Quality/optimization | Analytics, E2E, security, performance, cost reviews |
 | 14 | Launch | CI/CD, environments, smoke tests, backup and rollback |
 
+The Phase 1 design system must translate the approved mockup into reusable tokens and components. Phases 2, 3, and 5 must include panel-by-panel visual comparison for marketing, public news, and administration surfaces. Phase 13 must include automated and manual visual-regression coverage for both themes.
+
 ## 18. Required documentation
 
 Maintain README plus product requirements, brand/ownership, global strategy, architecture, routes, components, data model, AI/ingestion/editorial/video/audio pipelines, content rights, security, accessibility, internationalization, geographic coverage, recommendations, analytics, testing, environment variables, deployment, roadmap, limitations, and changelog documents.
@@ -327,5 +373,6 @@ Maintain README plus product requirements, brand/ownership, global strategy, arc
 
 A feature is done only when its STABLE lifecycle is complete; acceptance criteria pass; lint, types, tests, and build pass; authorization, validation, failure states, accessibility, responsiveness, localization, analytics, documentation, and tracker evidence are complete; mock/live status is truthful; secrets are absent; and no known critical issue remains.
 
-The MVP is complete only when it runs locally and in a documented deployment environment; ownership and global positioning are correct; global and country discovery work; auth, onboarding, saved content, protected administration, editorial review, ingestion/deduplication/clustering, validated AI output, media workflows, legal/trust pages, accessibility basics, internationalization, tested rules, deployment, rollback, and limitations are all documented and verified.
+For any user-interface feature, “done” additionally requires comparison with `docs/design/nyavista-ui-mockup-light-dark.png`, verification in both light and dark themes, and documentation of all intentional deviations.
 
+The MVP is complete only when it runs locally and in a documented deployment environment; ownership and global positioning are correct; global and country discovery work; auth, onboarding, saved content, protected administration, editorial review, ingestion/deduplication/clustering, validated AI output, media workflows, legal/trust pages, accessibility basics, internationalization, tested rules, deployment, rollback, and limitations are all documented and verified.
