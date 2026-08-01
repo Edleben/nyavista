@@ -28,6 +28,8 @@ This file is the delivery source of truth. Update it after evidence exists, not 
 | Last updated | YYYY-MM-DD |
 | Updated by | Name/agent |
 | STABLE framework path/version | Locate at repository root / record exact reference |
+| Approved visual reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
+| Visual baseline status | APPROVED_REFERENCE |
 | Highest open risk | TBD |
 | Build | NOT_RUN |
 | Tests | NOT_RUN |
@@ -64,7 +66,14 @@ Create one row per independently testable outcome. Split rows that require diffe
 | F-000 | 0 | Locate and map root STABLE framework | P0 | NOT_STARTED | — | — | Complete framework read; workflow mapped; no invented rules | Path/version and review note | CRITICAL | Repository access | Constraints/specs | — |
 | F-001 | 0 | Repository audit | P0 | NOT_STARTED | — | — | Current architecture, changes, dependencies and gaps documented | Audit report | HIGH | F-000 | Architecture | — |
 | F-010 | 1 | Central brand/company configuration | P0 | NOT_STARTED | — | — | US ownership and global positioning have one source of truth | Unit/render checks | MEDIUM | F-001 | Brand/ownership | — |
+| F-011 | 1 | Translate approved mockup into design tokens | P0 | NOT_STARTED | — | — | Light/dark colors, typography, spacing, radii, elevation and states are centralized | Token/unit/visual checks | HIGH | F-000, F-001 | Components/design system | — |
+| F-012 | 1 | Build mockup-aligned shared components | P0 | NOT_STARTED | — | — | Cards, chips, buttons, badges, navigation and media controls match baseline accessibly | Component/visual/a11y checks | HIGH | F-011 | Components | — |
+| F-013 | 1 | Establish visual-regression workflow | P1 | NOT_STARTED | — | — | Stable screenshots cover both themes and agreed breakpoints | Baseline artifacts | HIGH | F-011, F-012 | Testing | — |
+| F-014 | 2 | Marketing homepage visual implementation | P0 | NOT_STARTED | — | — | Marketing panel hierarchy is reproduced responsively in light/dark themes | Screenshots/E2E/a11y | HIGH | F-011, F-012 | Marketing | — |
 | F-020 | 3 | Global/country/region feed architecture | P0 | NOT_STARTED | — | — | Configurable geography; no discriminatory hardcoding | Unit/E2E/fairness checks | HIGH | F-010 | Geographic coverage | — |
+| F-021 | 3 | News feed and story visual implementation | P0 | NOT_STARTED | — | — | Feed/story panels guide responsive, accessible light/dark screens | Screenshots/E2E/a11y | HIGH | F-012, F-020 | Public UX | — |
+| F-022 | 3 | Mobile feed and video visual implementation | P0 | NOT_STARTED | — | — | Mobile panels guide accessible touch-first responsive flows | Device screenshots/E2E | HIGH | F-012, media data | Public UX | — |
+| F-031 | 5 | Editorial dashboard visual implementation | P1 | NOT_STARTED | — | — | Admin panel guides metrics, queues, risks and coverage in both themes | Screenshots/E2E/a11y | HIGH | F-012, RBAC | Admin UX | — |
 | F-030 | 6 | Server-side RBAC and Firebase rules | P0 | NOT_STARTED | — | — | Unauthorized access denied in UI and backend | Rules/integration tests | CRITICAL | Auth/data model | Security | — |
 | F-040 | 7 | Rights-aware ingestion | P0 | NOT_STARTED | — | — | Rights enforced; no paywall bypass/full-text default | Unit/integration logs | CRITICAL | Sources/providers | Content rights | — |
 | F-050 | 8 | Event clustering | P0 | NOT_STARTED | — | — | Related reports cluster; unrelated reports remain separate | Edge-case suite | HIGH | Ingestion/embeddings | AI pipeline | — |
@@ -94,6 +103,9 @@ Copy this section for each feature.
 - Provider and environment impact:
 - Rights/privacy/security impact:
 - Accessibility/localization/geographic-fairness impact:
+- Mockup panel(s) used:
+- Visual baseline path/version/hash:
+- Required themes/breakpoints:
 
 #### STABLE record
 - Framework path and version/commit:
@@ -123,6 +135,11 @@ Copy this section for each feature.
 - [ ] Accessibility checks
 - [ ] Production build
 - [ ] Manual flow verification
+- [ ] Applicable mockup panels reviewed
+- [ ] Light-theme visual comparison captured
+- [ ] Dark-theme visual comparison captured
+- [ ] Mobile/desktop breakpoint comparison captured
+- [ ] Intentional deviations documented and approved
 
 #### Delivery evidence
 - Test/build results:
@@ -145,6 +162,9 @@ Copy this section for each feature.
 | R-005 | Client-only authorization | Security | Medium | Critical | CRITICAL | Server RBAC and Rules tests | Direct API access succeeds | — | OPEN |
 | R-006 | Mock presented as live | Trust | Medium | High | HIGH | Visible labels, provider status, truthful docs | UI claims live integration | — | OPEN |
 | R-007 | Media cost escalation | Operations | Medium | High | HIGH | Mocks, queues, quotas, cost telemetry | Spend exceeds budget | — | OPEN |
+| R-008 | Mockup treated as literal functional specification | UX/product | Medium | High | HIGH | Written requirements and accessibility override incidental image details | Generated placeholder copied as truth | — | OPEN |
+| R-009 | Light/dark visual drift | UX | Medium | Medium | MEDIUM | Shared semantic tokens and visual regression | Theme-specific components diverge | — | OPEN |
+| R-010 | Responsive divergence from reference | UX/accessibility | Medium | High | HIGH | Breakpoint QA and documented adaptations | Overflow, clipping, unreadable density | — | OPEN |
 
 ## Decision log
 
@@ -164,6 +184,9 @@ Copy this section for each feature.
 | Accessibility | Automated + manual | NOT_RUN | — | — | — |
 | Security | Review/tests | NOT_RUN | — | — | — |
 | Production build | Repository-defined | NOT_RUN | — | — | — |
+| Light-theme visual regression | Approved screenshots | NOT_RUN | — | — | — |
+| Dark-theme visual regression | Approved screenshots | NOT_RUN | — | — | — |
+| Responsive mockup comparison | Mobile/tablet/desktop | NOT_RUN | — | — | — |
 
 ## Documentation tracker
 
@@ -209,6 +232,8 @@ NEXT PHASE:
 ### Product and content
 
 - [ ] All P0/P1 scope is `DONE` or explicitly deferred with approval.
+- [ ] All applicable screens are compared with `docs/design/nyavista-ui-mockup-light-dark.png`.
+- [ ] Light and dark visual baselines are approved with documented deviations.
 - [ ] Global positioning and E-DEAL EXPRESS LLC ownership are accurate.
 - [ ] Demo/mock/live content and providers are unmistakably labeled.
 - [ ] Source links, AI disclosures, correction and reporting processes work.
@@ -239,4 +264,3 @@ NEXT PHASE:
 - Smoke-test report:
 - Rollback target/procedure:
 - Approval names/dates:
-
