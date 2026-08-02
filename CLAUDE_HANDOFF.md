@@ -20,7 +20,7 @@ Required fields for every implementation entry:
 | Field | Current value |
 |---|---|
 | Approved work | Phase 0 audit plus Phase 1 first-pass foundation |
-| Active tracker IDs | F-001, F-010, F-011, F-012, F-015 |
+| Active tracker IDs | F-001, F-010, F-011, F-012, F-015, F-016 |
 | Active agent | Codex |
 | STABLE reference | `STABLE_FRAMEWORK.md` at commit `f8ab99e` |
 | UI reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
@@ -47,10 +47,22 @@ Required fields for every implementation entry:
 
 | Priority | Tracker ID | Next action | Required evidence | Owner |
 |---|---|---|---|---|
-| P0 | F-015 | Replace the typed tracker snapshot with a validated build-time `PRODUCT_TRACKER.md` parser | Schema/unit tests, malformed-markdown failure state, polling semantics | Unassigned |
+| P0 | F-016 | Review the Markdown-synchronized hierarchy and complete visual baselines | Light/dark screenshots at required breakpoints | Unassigned |
 | P0 | F-013 | Establish browser screenshot baselines | Light/dark at mobile, tablet, desktop, and large desktop | Unassigned |
 | P0 | F-010 | Expand central configuration into metadata and locale helpers | Unit/render checks | Unassigned |
 | P1 | F-014 | Implement full marketing route only after Phase 2 approval | Responsive and accessibility evidence | Unassigned |
+
+### 2026-08-01 — Codex — F-016
+
+- Outcome: replaced the duplicated six-phase tracker snapshot with a validated UI generated from `PRODUCT_TRACKER.md`.
+- Scope: canonical sprint and feature registers; build-time watched Markdown module; strict parser; six sprints, 15 phases, full feature inventory, derived progress, feature acceptance/evidence, dependency/risk, and STABLE checkpoint views.
+- Excluded: browser-side Markdown editing, persistence, collaboration, providers, deployment, and any phase advancement.
+- STABLE: root framework at baseline commit `f902b9d`; existing behavior audited before edits; dashboard/design-system mockup panels informed hierarchy, density, tokens, theme, and responsive decisions; validation results recorded in both delivery documents.
+- Files: `PRODUCT_TRACKER.md`, `app/page.tsx`, `app/globals.css`, `lib/tracker.ts`, `build/tracker-vite-plugin.ts`, `virtual-product-tracker.d.ts`, `vite.config.ts`, `tests/rendered-html.test.mjs`, `CLAUDE_HANDOFF.md`.
+- Verification: ESLint PASS; strict TypeScript PASS; 2/2 tests PASS; production build PASS. Automated browser screenshots remain pending because browser-control tooling was unavailable in this session.
+- Truthfulness: tracker values are documented implementation records loaded from the repository, not live operational telemetry; no external provider or production data was added.
+- Rollback: revert the F-016 files and delivery-register additions; no data migration exists.
+- Next safe action: review F-016 and capture F-013 light/dark baselines at mobile, tablet, desktop, and large desktop. Do not advance phases automatically.
 
 ## Agent completion template
 

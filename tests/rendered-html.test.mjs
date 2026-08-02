@@ -32,8 +32,13 @@ test("centralizes product identity and preserves living delivery records", async
   ]);
   assert.match(product, /E-DEAL EXPRESS LLC/);
   assert.match(product, /United States/);
-  assert.match(tracker, /F-015/);
+  assert.match(tracker, /### Sprint register/);
+  assert.match(tracker, /### Feature progress register/);
+  assert.match(tracker, /F-016/);
   assert.match(handoff, /Cross-Agent Implementation Handoff/);
+  assert.match(page, /virtual:product-tracker/);
+  assert.match(page, /tracker\.sprints\.map/);
+  assert.match(page, /trackerCheckpoints\.map/);
   assert.match(page, /data-theme=/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /:focus-visible/);

@@ -84,6 +84,61 @@ Create one row per independently testable outcome. Split rows that require diffe
 | F-080 | 12 | Corrections and AI disclosure | P0 | NOT_STARTED | — | — | Public correction history and disclosures visible | E2E/legal review | CRITICAL | Publishing | Trust/legal | — |
 | F-090 | 14 | Production release gate | P0 | NOT_STARTED | — | — | All release checklist gates approved | Release report | CRITICAL | All P0/P1 work | Deployment | — |
 
+## Delivery hierarchy
+
+This is the canonical source for the Project Tracker UI. Sprints group phases for planning, but do not authorize skipping phase gates. Add or split feature rows as scope becomes clearer; never replace evidence-backed progress with estimates presented as fact.
+
+### Sprint register
+
+| ID | Sprint | Goal | Phases | Status |
+|---|---|---|---|---|
+| S0 | Readiness | Establish governance, architecture, risks, and a traceable delivery baseline | P0 | IN_PROGRESS |
+| S1 | Experience foundation | Build the shared system, marketing surface, and public demo experience | P1, P2, P3 | IN_PROGRESS |
+| S2 | Identity and editorial control | Add secure identity, personalization, editorial operations, and persistence | P4, P5, P6 | PLANNED |
+| S3 | Intelligence pipeline | Build rights-aware ingestion, clustering, AI intelligence, and reviewed media | P7, P8, P9, P10 | PLANNED |
+| S4 | Engagement and trust | Add engagement/revenue seams and complete trust/localization foundations | P11, P12 | PLANNED |
+| S5 | Quality and launch | Prove quality, security, performance, operations, and launch readiness | P13, P14 | PLANNED |
+
+### Feature progress register
+
+| ID | Sprint | Phase | Feature | Priority | Status | Progress | Checkpoint | Owner | Acceptance / evidence | Risk | Dependencies |
+|---|---|---|---|---|---|---:|---|---|---|---|---|
+| F-000 | S0 | P0 | Locate and map root STABLE framework | P0 | DONE | 100% | DONE | Codex | Root framework and required references reviewed; workflow mapped | CRITICAL | Repository access |
+| F-001 | S0 | P0 | Repository audit and architecture baseline | P0 | IN_PROGRESS | 55% | BUILD | Codex | Repository, branch, runtime, build, risks, and UI audit evidence | HIGH | F-000 |
+| F-002 | S0 | P0 | Repository ignore and branch-governance hardening | P1 | DONE | 100% | DONE | Codex | Ignore audit and active GitHub ruleset 20211916 | MEDIUM | F-000, F-001 |
+| F-010 | S1 | P1 | Central brand/company configuration | P0 | IN_PROGRESS | 60% | BUILD | Codex | Central identity exists; metadata and locale helpers remain | MEDIUM | F-001 |
+| F-011 | S1 | P1 | Translate approved mockup into design tokens | P0 | IN_REVIEW | 80% | REVIEW | Codex | Token and responsive browser review pass; baseline automation pending | HIGH | F-000, F-001 |
+| F-012 | S1 | P1 | Build mockup-aligned shared components | P0 | IN_REVIEW | 75% | REVIEW | Codex | Lint, types, build, and desktop/mobile browser review pass | HIGH | F-011 |
+| F-013 | S1 | P1 | Establish visual-regression workflow | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Light/dark baselines at agreed breakpoints required | HIGH | F-011, F-012 |
+| F-015 | S1 | P1 | Living sprint tracker and agent handoff foundation | P0 | IN_REVIEW | 85% | REVIEW | Codex | Existing tracker shell and handoff pass responsive review | HIGH | F-000, F-001, F-011 |
+| F-016 | S1 | P1 | Markdown-synchronized delivery hierarchy | P0 | IN_REVIEW | 90% | REVIEW | Codex | Build-time Markdown parser and Sprint → Phase → Feature UI pass lint, type, tests, and build; automated visual capture pending | HIGH | F-001, F-015 |
+| F-014 | S1 | P2 | Marketing homepage visual implementation | P0 | DISCOVERY | 10% | SCOPE | Unassigned | Responsive light/dark screenshots, E2E, and accessibility required | HIGH | F-011, F-012 |
+| F-017 | S1 | P2 | Marketing routes, legal shells, and SEO | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Required routes, metadata, canonicalization, and legal review required | HIGH | F-010, F-014 |
+| F-020 | S1 | P3 | Global/country/region feed architecture | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Configurable geography, unit, E2E, and fairness checks required | HIGH | F-010 |
+| F-021 | S1 | P3 | News feed and story experience | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Responsive feed/story screenshots, E2E, and accessibility required | HIGH | F-012, F-020 |
+| F-022 | S1 | P3 | Search, mobile feed, and demo media | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Search/filter, device, E2E, and media-fallback evidence required | HIGH | F-012, F-020 |
+| F-023 | S2 | P4 | Authentication and onboarding | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Auth, denial, verification, recovery, and security tests required | CRITICAL | F-010, F-030 |
+| F-024 | S2 | P4 | Preferences, follows, bookmarks, and history | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Persistence, privacy, locale, and E2E tests required | HIGH | F-023, F-034 |
+| F-031 | S2 | P5 | Editorial dashboard visual implementation | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Light/dark screenshots, E2E, and accessibility required | HIGH | F-012, F-030 |
+| F-032 | S2 | P5 | Editorial review and publishing workflow | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | RBAC, review, correction, audit, and E2E tests required | CRITICAL | F-030, F-034 |
+| F-033 | S2 | P5 | Source, coverage, user, and media administration | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Permission, validation, empty/error, and audit tests required | CRITICAL | F-030, F-034 |
+| F-030 | S2 | P6 | Server-side RBAC and Firebase rules | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Rules and adversarial integration tests required | CRITICAL | F-023, data model |
+| F-034 | S2 | P6 | Firebase repositories, indexes, and storage boundaries | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Emulator, schema, index, storage, and integration tests required | CRITICAL | F-030 |
+| F-035 | S2 | P6 | Emulator fixtures, migrations, backup, and rollback | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Fictional fixtures and recovery evidence required | HIGH | F-034 |
+| F-040 | S3 | P7 | Rights-aware ingestion adapters | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Rights, provider failure, and integration tests required | CRITICAL | F-034 |
+| F-041 | S3 | P7 | Normalization, deduplication, and geography detection | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Schema, dedupe, locale, and fairness tests required | HIGH | F-040 |
+| F-042 | S3 | P7 | Ingestion jobs, retries, observability, and cost controls | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Retry, dead-letter, timeout, load, and cost evidence required | HIGH | F-040, F-041 |
+| F-050 | S3 | P8 | Event clustering and merge/split controls | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Edge, multilingual, follow-up, and regression tests required | HIGH | F-041, embeddings |
+| F-060 | S3 | P9 | Structured multi-source summaries | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Schema, malformed-output, red-team, and editorial tests required | CRITICAL | F-050, LLM seam |
+| F-061 | S3 | P9 | AI provider seams, prompts, review, and cost audit | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Provider fallback, audit, cost, and approval tests required | CRITICAL | F-060 |
+| F-070 | S3 | P10 | Rights-cleared video and audio workflow | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Integration, accessibility, rights, review, and E2E tests required | HIGH | F-032, F-060 |
+| F-071 | S4 | P11 | Newsletters, alerts, and notification preferences | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Consent, retry, preference, and integration tests required | HIGH | F-024, F-034 |
+| F-072 | S4 | P11 | Plans, entitlements, and payment provider seam | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Webhook, authorization, failure, and billing tests required | CRITICAL | F-023, F-034 |
+| F-080 | S4 | P12 | Corrections, disclosures, and public trust flows | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | E2E, audit, editorial, and legal review required | CRITICAL | F-032 |
+| F-081 | S4 | P12 | Accessibility, localization, and geographic fairness | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | WCAG, locale, timezone, translation, and fairness tests required | CRITICAL | All user-facing phases |
+| F-082 | S5 | P13 | Analytics, security, performance, reliability, and cost gates | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | E2E, security, performance, observability, and cost evidence required | CRITICAL | P0-P12 |
+| F-090 | S5 | P14 | Production release gate | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Release report, environments, backup, rollback, smoke, and approvals required | CRITICAL | All P0/P1 work |
+
 ## Feature implementation card
 
 Copy this section for each feature.
@@ -189,6 +244,42 @@ Copy this section for each feature.
 - Accessibility/i18n/geographic fairness: WCAG-oriented semantics, focus, reduced motion, touch-sized controls, responsive layout; English copy only; geography visual explicitly separates commercial priority from editorial importance.
 - Migration/rollback: no data migration. Roll back by removing the generated application scaffold and reverting this tracker/handoff entry.
 - Next approval required: Phase 1 review or explicit approval for a named next tracker item; do not automatically advance to Phase 2, 3, or 5.
+
+### F-016 Markdown-synchronized delivery hierarchy
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P0 / HIGH
+- Status: IN_REVIEW
+- Requested outcome: make the complete delivery plan visible as Sprint → Phase → Feature → implementation progress and keep the UI synchronized with this file.
+- In scope: canonical sprint and feature registers, strict build-time parsing, derived roll-up progress, responsive hierarchy navigation, feature evidence/dependency/risk detail, and STABLE checkpoints.
+- Out of scope: editing Markdown from the browser, database persistence, multi-user collaboration, notifications, and progression into another delivery phase.
+
+#### STABLE record
+
+- Framework path and version/commit: `STABLE_FRAMEWORK.md`, repository commit `f902b9d` baseline.
+- Scope/Think: audited the 15-phase Markdown roadmap and six-phase hard-coded UI; selected this file as the sole editable delivery source and the approved dashboard/design-system mockup panels as visual direction.
+- Assess Risk: fail builds on malformed tables, invalid statuses/progress/checkpoints, duplicate feature IDs, and unknown sprint/phase mappings; keep derived progress distinguishable from live operational data.
+- Build: added a watched Vite virtual module, strict parser/types, six sprint groups, all 15 phases, comprehensive feature rows, roll-up metrics, keyboard-operable selectors, semantic progress, light/dark tokens, and responsive layouts.
+- Validate/Review: ESLint, strict TypeScript, rendered-shell tests, and production build pass. Browser screenshot automation is unavailable in the current tool session, so final multi-breakpoint visual evidence remains open under F-013.
+
+#### Acceptance and verification
+
+- [x] `PRODUCT_TRACKER.md` contains canonical sprint and feature progress registers.
+- [x] UI renders Sprint → Phase → Feature → progress without a duplicated hard-coded roadmap.
+- [x] Sprint, phase, and overall percentages derive from child feature progress.
+- [x] Invalid hierarchy/status/progress/checkpoint data fails validation during build.
+- [x] Feature detail exposes owner, dependency, risk, acceptance/evidence, and current STABLE checkpoint.
+- [x] Lint: PASS — ESLint, 2026-08-01.
+- [x] Type check: PASS — strict TypeScript `--noEmit`, 2026-08-01.
+- [x] Tests: PASS — 2/2 Node rendered-shell/documentation tests, 2026-08-01.
+- [x] Production build: PASS — vinext/Vite, 2026-08-01.
+- [ ] Automated light/dark mobile/tablet/desktop screenshots — retained in F-013; browser-control capability unavailable in this session.
+
+- Security/rights/editorial: local Markdown only; no credentials, providers, publishing, external content, or authorization behavior added.
+- Accessibility/i18n/geographic fairness: native buttons, pressed states, labeled progress, visible focus inheritance, reduced-motion inheritance, responsive stacking; English-only tracker labels; no geographic ranking logic.
+- Migration/rollback: no data migration. Revert the parser/plugin/UI/register additions to restore the prior static tracker.
+- Next approval required: review F-016 and complete F-013 visual baselines; do not advance beyond the approved Phase 1 foundation.
 
 ## Risk register
 
