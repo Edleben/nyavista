@@ -20,7 +20,7 @@ Required fields for every implementation entry:
 | Field | Current value |
 |---|---|
 | Approved work | Phase 0 audit plus Phase 1 first-pass foundation |
-| Active tracker IDs | F-001, F-010, F-011, F-012, F-015, F-016 |
+| Active tracker IDs | F-001, F-010, F-011, F-012, F-015, F-016; F-013 complete |
 | Active agent | Codex |
 | STABLE reference | `STABLE_FRAMEWORK.md` at commit `f8ab99e` |
 | UI reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
@@ -47,10 +47,23 @@ Required fields for every implementation entry:
 
 | Priority | Tracker ID | Next action | Required evidence | Owner |
 |---|---|---|---|---|
-| P0 | F-016 | Review the Markdown-synchronized hierarchy and complete visual baselines | Light/dark screenshots at required breakpoints | Unassigned |
-| P0 | F-013 | Establish browser screenshot baselines | Light/dark at mobile, tablet, desktop, and large desktop | Unassigned |
+| P0 | F-016 | Review the Markdown-synchronized hierarchy using completed F-013 evidence | Acceptance review and closure decision | Unassigned |
 | P0 | F-010 | Expand central configuration into metadata and locale helpers | Unit/render checks | Unassigned |
 | P1 | F-014 | Implement full marketing route only after Phase 2 approval | Responsive and accessibility evidence | Unassigned |
+
+### 2026-08-01 — Codex — F-013
+
+- Outcome: completed a repeatable Playwright visual-regression workflow with 24 committed baselines and a non-mutating verification command.
+- Scope: briefing, tracker, and editorial surfaces; light/dark; 390×844, 768×1024, 1440×1000, and 1920×1080; real navigation/theme interactions; overlay, resource, console, and horizontal-overflow assertions.
+- Excluded: Phase 2+ UI approval, Firefox/WebKit baselines, hosted artifact publication, and screen-reader certification.
+- STABLE: root framework at baseline `f902b9d`; applicable approved mockup panels reviewed; visual/responsive risks assessed; inaccurate command-line Chrome viewport evidence rejected; Playwright evidence built, validated, replayed, and documented.
+- Files: `playwright.config.ts`, `tests/visual-regression.spec.ts`, `tests/visual-baselines/`, `package.json`, `pnpm-lock.yaml`, `.gitignore`, `app/globals.css`, `tests/rendered-html.test.mjs`, `PRODUCT_TRACKER.md`, `CLAUDE_HANDOFF.md`.
+- Verification: visual baseline generation PASS 24/24; non-mutating visual replay PASS 24/24; ESLint PASS; strict TypeScript PASS; Node tests PASS 3/3; production build PASS.
+- Finding/fix: the first true mobile capture detected horizontal tracker overflow; min-width containment, safe wrapping, zero-minimum metric columns, and explicit mobile viewport constraints corrected it before baseline acceptance.
+- Mockup/deviations: editorial typography, dashboard density, semantic light/dark surfaces, and restrained accent system align with the approved reference. Rights-safe CSS abstract artwork and responsive real-page proportions remain intentional deviations.
+- Truthfulness/security/rights: demo-only fictional content; no providers, publishing, credentials, personal information, or publisher assets introduced.
+- Rollback: remove Playwright configuration/tests/baselines and revert the narrow tracker containment rules; no migration exists.
+- Next safe action: review F-011/F-012/F-015/F-016 against F-013 evidence, then complete F-010 metadata/locale helpers. Do not start F-014 without explicit Phase 2 approval.
 
 ### 2026-08-01 — Codex — F-016
 

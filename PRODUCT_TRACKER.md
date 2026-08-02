@@ -29,10 +29,10 @@ This file is the delivery source of truth. Update it after evidence exists, not 
 | Updated by | Codex |
 | STABLE framework path/version | `STABLE_FRAMEWORK.md` at repository root, commit `f8ab99e` |
 | Approved visual reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
-| Visual baseline status | APPROVED_REFERENCE |
+| Visual baseline status | PASS — 24 Playwright baselines across 3 surfaces, 2 themes, and 4 breakpoints |
 | Highest open risk | First pass is demo-only; persistence, authentication, ingestion, AI, and publishing are not live |
 | Build | PASS — `vinext build` (2026-08-01) |
-| Tests | PASS — 2/2 rendered-shell and delivery-record tests (2026-08-01) |
+| Tests | PASS — 3/3 Node tests and 24/24 Playwright visual tests (2026-08-01) |
 | Security review | NOT_STARTED |
 | Accessibility review | IN_REVIEW — semantic DOM, keyboard focus, responsive navigation, reduced motion |
 | Legal/editorial review | NOT_STARTED |
@@ -70,7 +70,7 @@ Create one row per independently testable outcome. Split rows that require diffe
 | F-010 | 1 | Central brand/company configuration | P0 | NOT_STARTED | — | — | US ownership and global positioning have one source of truth | Unit/render checks | MEDIUM | F-001 | Brand/ownership | — |
 | F-011 | 1 | Translate approved mockup into design tokens | P0 | NOT_STARTED | — | — | Light/dark colors, typography, spacing, radii, elevation and states are centralized | Token/unit/visual checks | HIGH | F-000, F-001 | Components/design system | — |
 | F-012 | 1 | Build mockup-aligned shared components | P0 | NOT_STARTED | — | — | Cards, chips, buttons, badges, navigation and media controls match baseline accessibly | Component/visual/a11y checks | HIGH | F-011 | Components | — |
-| F-013 | 1 | Establish visual-regression workflow | P1 | NOT_STARTED | — | — | Stable screenshots cover both themes and agreed breakpoints | Baseline artifacts | HIGH | F-011, F-012 | Testing | — |
+| F-013 | 1 | Establish visual-regression workflow | P1 | DONE | Codex | Root STABLE and approved mockup reviewed; Playwright workflow exercises navigation, themes, error states, overflow, and screenshots | Stable screenshots cover all current surfaces, both themes, and four agreed breakpoints | 24/24 visual tests PASS; 24 committed PNG baselines; mobile tracker overflow found and corrected | HIGH | F-011, F-012 | `playwright.config.ts`, `tests/visual-regression.spec.ts`, baseline README | Working tree |
 | F-014 | 2 | Marketing homepage visual implementation | P0 | NOT_STARTED | — | — | Marketing panel hierarchy is reproduced responsively in light/dark themes | Screenshots/E2E/a11y | HIGH | F-011, F-012 | Marketing | — |
 | F-020 | 3 | Global/country/region feed architecture | P0 | NOT_STARTED | — | — | Configurable geography; no discriminatory hardcoding | Unit/E2E/fairness checks | HIGH | F-010 | Geographic coverage | — |
 | F-021 | 3 | News feed and story visual implementation | P0 | NOT_STARTED | — | — | Feed/story panels guide responsive, accessible light/dark screens | Screenshots/E2E/a11y | HIGH | F-012, F-020 | Public UX | — |
@@ -109,7 +109,7 @@ This is the canonical source for the Project Tracker UI. Sprints group phases fo
 | F-010 | S1 | P1 | Central brand/company configuration | P0 | IN_PROGRESS | 60% | BUILD | Codex | Central identity exists; metadata and locale helpers remain | MEDIUM | F-001 |
 | F-011 | S1 | P1 | Translate approved mockup into design tokens | P0 | IN_REVIEW | 80% | REVIEW | Codex | Token and responsive browser review pass; baseline automation pending | HIGH | F-000, F-001 |
 | F-012 | S1 | P1 | Build mockup-aligned shared components | P0 | IN_REVIEW | 75% | REVIEW | Codex | Lint, types, build, and desktop/mobile browser review pass | HIGH | F-011 |
-| F-013 | S1 | P1 | Establish visual-regression workflow | P1 | NOT_STARTED | 0% | SCOPE | Unassigned | Light/dark baselines at agreed breakpoints required | HIGH | F-011, F-012 |
+| F-013 | S1 | P1 | Establish visual-regression workflow | P1 | DONE | 100% | DONE | Codex | 24/24 Playwright baselines pass across briefing, tracker, and editorial; light/dark at mobile, tablet, desktop, and large desktop | HIGH | F-011, F-012 |
 | F-015 | S1 | P1 | Living sprint tracker and agent handoff foundation | P0 | IN_REVIEW | 85% | REVIEW | Codex | Existing tracker shell and handoff pass responsive review | HIGH | F-000, F-001, F-011 |
 | F-016 | S1 | P1 | Markdown-synchronized delivery hierarchy | P0 | IN_REVIEW | 90% | REVIEW | Codex | Build-time Markdown parser and Sprint → Phase → Feature UI pass lint, type, tests, and build; automated visual capture pending | HIGH | F-001, F-015 |
 | F-014 | S1 | P2 | Marketing homepage visual implementation | P0 | DISCOVERY | 10% | SCOPE | Unassigned | Responsive light/dark screenshots, E2E, and accessibility required | HIGH | F-011, F-012 |
@@ -207,6 +207,44 @@ Copy this section for each feature.
 - Commit/PR:
 - Reviewer/approval/date:
 ```
+
+### F-013 Visual-regression workflow
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P1 / HIGH
+- Status: DONE
+- Requested outcome: establish durable visual evidence for current Phase 1 surfaces in both themes and every required responsive breakpoint.
+- In scope: Playwright configuration, deterministic Chrome execution, real navigation/theme interactions, 24 committed PNG baselines, framework-overlay detection, failed-resource detection, console-error detection, horizontal-overflow assertions, reduced-motion emulation, and baseline documentation.
+- Out of scope: approving future Phase 2+ interfaces, screen-reader certification, cross-browser baselines, hosted screenshot storage, and automatic PR artifact publication.
+
+#### STABLE record
+
+- Framework path and version/commit: `STABLE_FRAMEWORK.md`, repository baseline commit `f902b9d`.
+- Scope/Think: reviewed the Phase 1 tracker gate, current briefing/tracker/editorial surfaces, and applicable marketing, mobile, editorial-dashboard, and design-system mockup panels.
+- Assess Risk: rejected command-line Chrome captures after proving Windows used an inaccurate wider CSS viewport; adopted Playwright device emulation and isolated server/browser state instead.
+- Build: added Playwright configuration, interaction-driven capture tests, committed baseline matrix, reproducible update/verification commands, artifact ignores, and a narrow mobile tracker containment correction discovered by the first baseline review.
+- Validate: 24/24 baseline updates and 24/24 non-mutating regression replays pass. Each case checks expected content/theme, error overlays, failed resources, console errors, and horizontal overflow.
+- Evolve: baseline updates require deliberate `pnpm visual:baseline` execution and human comparison with the approved mockup; ordinary verification uses `pnpm visual:test` and cannot rewrite evidence.
+
+#### Acceptance and verification
+
+- [x] Three surfaces: briefing, Project Tracker, and editorial overview.
+- [x] Light and dark themes.
+- [x] Mobile 390×844, tablet 768×1024, desktop 1440×1000, and large desktop 1920×1080.
+- [x] 24 committed PNG baselines under `tests/visual-baselines/`.
+- [x] Real navigation and theme controls exercised in every applicable case.
+- [x] No framework overlays, failed page resources, actionable console errors, or horizontal document overflow.
+- [x] Visual regression: PASS — 24/24, 2026-08-01.
+- [x] Lint: PASS — ESLint, 2026-08-01.
+- [x] Type check: PASS — strict TypeScript `--noEmit`, 2026-08-01.
+- [x] Tests/build: PASS — 3/3 Node tests and vinext/Vite production build, 2026-08-01.
+
+- Visual comparison/deviations: baselines retain the mockup's calm editorial hierarchy, serif/sans pairing, compact dashboard density, light/dark semantic surfaces, and restrained accent system. CSS-generated abstract art remains the documented rights-safe replacement for mockup photography. Presentation-board layouts remain adapted to real responsive viewports.
+- Security/rights/editorial: fictional/non-live content only; baseline images contain no credentials, personal data, licensed publisher assets, or publishing controls.
+- Accessibility/i18n/geographic fairness: reduced motion, keyboard-driven semantic controls, responsive containment, and both themes covered; English-only and Chrome-only baselines remain documented limitations; no ranking/geographic logic changed.
+- Migration/rollback: no data migration. Remove the Playwright files, scripts, baseline directory, and containment rules to revert.
+- Next approval required: review and close eligible Phase 1 items; the next unblocked implementation is F-010 metadata and locale helpers. Do not begin F-014 without Phase 2 approval.
 
 ### F-015 Living sprint tracker and agent handoff foundation
 

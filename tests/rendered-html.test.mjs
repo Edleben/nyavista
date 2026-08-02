@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -42,4 +42,17 @@ test("centralizes product identity and preserves living delivery records", async
   assert.match(page, /data-theme=/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /:focus-visible/);
+});
+
+test("keeps the complete visual baseline matrix", async () => {
+  const files = await readdir(new URL("./visual-baselines/", import.meta.url));
+  const pngs = files.filter((file) => file.endsWith(".png"));
+  assert.equal(pngs.length, 24);
+  for (const surface of ["briefing", "tracker", "editorial"]) {
+    for (const theme of ["light", "dark"]) {
+      for (const viewport of ["mobile", "tablet", "desktop", "large-desktop"]) {
+        assert.ok(pngs.includes(`${surface}-${theme}-${viewport}.png`));
+      }
+    }
+  }
 });
