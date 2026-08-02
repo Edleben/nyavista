@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="app" data-theme={theme}>
       <a className="skip-link" href="#main">Skip to main content</a>
-      <aside className={navOpen ? "sidebar open" : "sidebar"} aria-label="Primary navigation">
+      <aside id="primary-navigation" className={navOpen ? "sidebar open" : "sidebar"} aria-label="Primary navigation">
         <div className="brand"><span className="brand-mark">N</span><span>{product.name}</span><button className="nav-close" onClick={() => setNavOpen(false)} aria-label="Close navigation">×</button></div>
         <nav>
           <p className="nav-label">Workspace</p>
@@ -41,10 +41,11 @@ export default function Home() {
         <div className="sidebar-note"><span className="status-dot" /> Demo environment<p>No live reporting or providers</p></div>
         <button className="nav-item settings"><Icon>⚙</Icon>Settings</button>
       </aside>
+      {navOpen && <button className="sidebar-backdrop" onClick={() => setNavOpen(false)} aria-label="Close navigation"/>}
 
       <div className="workspace">
         <header className="topbar">
-          <button className="mobile-brand" onClick={() => setNavOpen(true)} aria-label="Open navigation" aria-expanded={navOpen}>N</button>
+          <button className="mobile-menu" onClick={() => setNavOpen(true)} aria-label="Open navigation" aria-expanded={navOpen} aria-controls="primary-navigation"><span aria-hidden="true">☰</span><strong>Menu</strong></button>
           <div><p className="eyebrow">{product.owner} · {product.foundingCountry}</p><strong>{view === "tracker" ? "Delivery workspace" : view === "editorial" ? "Editorial command centre" : "Global intelligence briefing"}</strong></div>
           <div className="top-actions">
             <button className="icon-button" aria-label="Search">⌕</button>

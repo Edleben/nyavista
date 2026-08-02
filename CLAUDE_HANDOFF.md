@@ -20,7 +20,7 @@ Required fields for every implementation entry:
 | Field | Current value |
 |---|---|
 | Approved work | Phase 0 audit plus Phase 1 first-pass foundation |
-| Active tracker IDs | F-001, F-011, F-012, F-015, F-016; F-010 and F-013 complete |
+| Active tracker IDs | F-001; F-010, F-011, F-012, F-013, F-015, and F-016 complete |
 | Active agent | Codex |
 | STABLE reference | `STABLE_FRAMEWORK.md` at commit `f8ab99e` |
 | UI reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
@@ -47,8 +47,7 @@ Required fields for every implementation entry:
 
 | Priority | Tracker ID | Next action | Required evidence | Owner |
 |---|---|---|---|---|
-| P0 | F-016 | Review the Markdown-synchronized hierarchy using completed F-013 evidence | Acceptance review and closure decision | Unassigned |
-| P0 | F-010 | Review completed identity, metadata, and locale evidence | Acceptance review and closure confirmation | Unassigned |
+| P0 | Phase 1 gate | Perform formal Phase 1 closure review; do not infer Phase 2 authorization | Phase completion report and explicit approval | Unassigned |
 | P1 | F-014 | Implement full marketing route only after Phase 2 approval | Responsive and accessibility evidence | Unassigned |
 
 ### 2026-08-01 — Codex — F-013
@@ -77,6 +76,19 @@ Required fields for every implementation entry:
 - Accessibility/i18n/geographic fairness: `lang=en-US`, BCP 47 supported locales, UTC canonical default, explicit timezone override, `Intl` formatting, deterministic unsupported-locale fallback, and a typed rule that commercial priority does not affect editorial importance.
 - Rollback: revert the focused configuration/layout/tests/compiler-option and delivery-record changes; no migration exists.
 - Next safe action: acceptance review for F-010 and the remaining Phase 1 review items. Do not start F-014 without explicit Phase 2 approval.
+
+### 2026-08-01 — Codex — F-011/F-012/F-015/F-016 acceptance and responsive sidebar correction
+
+- Outcome: user approved F-011, F-012, F-015, and F-016, reporting one remaining issue: the dashboard sidebar was not discoverable in mobile/responsive views. The issue was corrected and all four items are now `DONE`.
+- Root cause: the responsive sidebar already functioned as an off-canvas drawer, but its opener appeared only as an `N` brand mark, so it did not communicate navigation availability.
+- Fix: replaced the ambiguous opener with a visible `☰ Menu` control; linked it to the primary navigation with `aria-controls` and `aria-expanded`; retained the sidebar close control; added a dismissible backdrop; preserved the persistent desktop sidebar.
+- STABLE/mockup: approved mobile and editorial-dashboard mockup panels reviewed; smallest accessible correction applied without redesigning the shell or advancing scope.
+- Verification: focused sidebar tests PASS at 390×844 and 768×1024; drawer opens into the viewport and dismisses through the backdrop; 24 screenshot baselines and 26 total browser cases PASS; ESLint and strict TypeScript PASS; root extension-induced hydration noise suppressed only at `html`/`body` while deeper mismatches remain visible.
+- Files: `app/page.tsx`, `app/globals.css`, `app/layout.tsx`, `playwright.config.ts`, `tests/visual-regression.spec.ts`, responsive baseline PNGs, baseline README, `PRODUCT_TRACKER.md`, `CLAUDE_HANDOFF.md`.
+- Mock/live and rights: demo-only; no providers, publishing, credentials, personal data, or external assets added.
+- Accessibility/i18n: explicit Menu label, native buttons, accessible relationships/state, touch-friendly target, backdrop dismissal, focus styles, and reduced motion. English Menu text remains a later localization concern.
+- Rollback: revert the Menu/backdrop markup/styles/tests/baselines and acceptance record; no migration.
+- Next safe action: formal Phase 1 closure review. Phase 2 and F-014 remain unauthorized until explicitly approved.
 
 ### 2026-08-01 — Codex — F-016
 

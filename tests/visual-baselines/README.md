@@ -16,4 +16,4 @@ pnpm visual:test
 
 The capture matrix covers `briefing`, `tracker`, and `editorial` in light and dark themes at 390×844, 768×1024, 1440×1000, and 1920×1080. Playwright reaches each state through the visible navigation and theme controls, so the baselines also exercise those interactions without changing or persisting product data.
 
-Playwright starts an isolated development server and uses the installed Chrome channel with true CSS viewport emulation. Each test also rejects framework error overlays, browser console errors, and horizontal page overflow. Review every changed image against `docs/design/nyavista-ui-mockup-light-dark.png` before accepting a baseline update.
+Playwright starts an isolated development server and uses its isolated Chromium runtime with true CSS viewport emulation. Install that runtime with `pnpm exec playwright install chromium` after a fresh dependency installation. Each test also rejects framework error overlays, browser console errors, and horizontal page overflow. Review every changed image against `docs/design/nyavista-ui-mockup-light-dark.png` before accepting a baseline update.

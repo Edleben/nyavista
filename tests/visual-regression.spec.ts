@@ -50,3 +50,20 @@ for (const surface of surfaces) {
     }
   }
 }
+
+for (const viewport of viewports.filter(({ id }) => id === "mobile" || id === "tablet")) {
+  test(`sidebar drawer · ${viewport.id}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const menu = page.getByRole("button", { name: "Open navigation" });
+    const sidebar = page.getByRole("complementary", { name: "Primary navigation" });
+    await expect(menu).toBeVisible();
+    await expect(menu).toContainText("Menu");
+    await menu.click();
+    await expect(menu).toHaveAttribute("aria-expanded", "true");
+    await expect(sidebar).toBeInViewport();
+    await page.locator(".sidebar-backdrop").click({ position: { x: viewport.width - 20, y: 20 } });
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await expect(sidebar).not.toBeInViewport();
+  });
+}

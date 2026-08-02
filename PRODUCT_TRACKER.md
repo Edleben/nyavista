@@ -63,13 +63,13 @@ Create one row per independently testable outcome. Split rows that require diffe
 
 | ID | Phase | Epic/feature | Priority | Status | Owner | STABLE evidence | Acceptance criteria | Tests/evidence | Risk | Dependencies | Docs | Commit/PR |
 |---|---:|---|---|---|---|---|---|---|---|---|---|---|
-| F-015 | 1 | Living sprint tracker and agent handoff foundation | P0 | IN_REVIEW | Codex | Root STABLE and all approved mockup panels inspected; responsive light/dark comparison complete | Sprint phases, completion visualisation, polling timestamp, implementation steps, and cross-agent handoff are visible and documented | Lint, TypeScript, 2 tests, production build, desktop/mobile browser review PASS | HIGH | F-000, F-001, F-011 | `CLAUDE_HANDOFF.md`, tracker UI | Working tree |
+| F-015 | 1 | Living sprint tracker and agent handoff foundation | P0 | DONE | Codex | Root STABLE and approved mockup panels inspected; responsive light/dark comparison and user acceptance complete | Responsive application shell, truthful demo surfaces, synchronized tracker, accessible navigation, and cross-agent handoff are visible and documented | User approved 2026-08-01; mobile Menu issue corrected; lint, types, 6 Node tests, build, and 26 browser tests PASS | HIGH | F-000, F-001, F-011 | `CLAUDE_HANDOFF.md`, tracker UI | Working tree |
 | F-002 | 0 | Repository ignore and branch-governance hardening | P1 | DONE | Codex | `STABLE_FRAMEWORK.md` reviewed; generated/local artifact audit performed on `feature/nyavista_cedi_app` at `f902b9d`; GitHub ruleset `20211916` verified active | Generated dependencies, build output, caches, logs, editor state, OS metadata, and secrets stay out of Git; sanitized environment templates remain committable; `main` accepts changes only through PRs | `git status --ignored`, tracked-artifact scan, `git check-ignore`; active GitHub ruleset applies to `main`, requires PRs, restricts deletion, blocks force pushes, and has an empty bypass list | MEDIUM | F-000, F-001, GitHub admin access | `.gitignore`, repository settings | Working tree; `https://github.com/ceditech/nyavista/settings/rules/20211916` |
 | F-000 | 0 | Locate and map root STABLE framework | P0 | NOT_STARTED | — | — | Complete framework read; workflow mapped; no invented rules | Path/version and review note | CRITICAL | Repository access | Constraints/specs | — |
 | F-001 | 0 | Repository audit | P0 | NOT_STARTED | — | — | Current architecture, changes, dependencies and gaps documented | Audit report | HIGH | F-000 | Architecture | — |
 | F-010 | 1 | Central brand/company configuration | P0 | DONE | Codex | Root STABLE, product specification, constraints, and Next.js metadata guidance reviewed; complete STABLE record below | Ownership, global positioning, demo metadata, commercial markets, locale resolution, UTC storage guidance, and locale-aware formatters have one typed source | 6/6 Node tests, lint, types, build, rendered metadata, and 24/24 visual regressions PASS | MEDIUM | F-001 | Brand/ownership, metadata, locale helpers | Working tree |
-| F-011 | 1 | Translate approved mockup into design tokens | P0 | NOT_STARTED | — | — | Light/dark colors, typography, spacing, radii, elevation and states are centralized | Token/unit/visual checks | HIGH | F-000, F-001 | Components/design system | — |
-| F-012 | 1 | Build mockup-aligned shared components | P0 | NOT_STARTED | — | — | Cards, chips, buttons, badges, navigation and media controls match baseline accessibly | Component/visual/a11y checks | HIGH | F-011 | Components | — |
+| F-011 | 1 | Translate approved mockup into design tokens | P0 | DONE | Codex | Approved mockup and both themes reviewed; user accepted 2026-08-01 | Shared semantic colors, typography, spacing, radii, elevation, focus, reduced motion, and states remain coherent | 24 visual baselines, 26 browser tests, lint, types, and user review PASS | HIGH | F-000, F-001 | Components/design system | Working tree |
+| F-012 | 1 | Build mockup-aligned shared components | P0 | DONE | Codex | Shared component patterns reviewed across all current surfaces and breakpoints; user accepted 2026-08-01 | Navigation, cards, metrics, badges, buttons, panels, progress, and responsive states are consistent and accessible | Mobile Menu discoverability corrected; 26 browser tests, lint, types, and build PASS | HIGH | F-011 | Components | Working tree |
 | F-013 | 1 | Establish visual-regression workflow | P1 | DONE | Codex | Root STABLE and approved mockup reviewed; Playwright workflow exercises navigation, themes, error states, overflow, and screenshots | Stable screenshots cover all current surfaces, both themes, and four agreed breakpoints | 24/24 visual tests PASS; 24 committed PNG baselines; mobile tracker overflow found and corrected | HIGH | F-011, F-012 | `playwright.config.ts`, `tests/visual-regression.spec.ts`, baseline README | Working tree |
 | F-014 | 2 | Marketing homepage visual implementation | P0 | NOT_STARTED | — | — | Marketing panel hierarchy is reproduced responsively in light/dark themes | Screenshots/E2E/a11y | HIGH | F-011, F-012 | Marketing | — |
 | F-020 | 3 | Global/country/region feed architecture | P0 | NOT_STARTED | — | — | Configurable geography; no discriminatory hardcoding | Unit/E2E/fairness checks | HIGH | F-010 | Geographic coverage | — |
@@ -107,11 +107,11 @@ This is the canonical source for the Project Tracker UI. Sprints group phases fo
 | F-001 | S0 | P0 | Repository audit and architecture baseline | P0 | IN_PROGRESS | 55% | BUILD | Codex | Repository, branch, runtime, build, risks, and UI audit evidence | HIGH | F-000 |
 | F-002 | S0 | P0 | Repository ignore and branch-governance hardening | P1 | DONE | 100% | DONE | Codex | Ignore audit and active GitHub ruleset 20211916 | MEDIUM | F-000, F-001 |
 | F-010 | S1 | P1 | Central brand/company configuration | P0 | DONE | 100% | DONE | Codex | Typed identity, no-index demo metadata, commercial/editorial separation, locale fallback, UTC policy, Intl formatters, and all verification gates pass | MEDIUM | F-001 |
-| F-011 | S1 | P1 | Translate approved mockup into design tokens | P0 | IN_REVIEW | 80% | REVIEW | Codex | Token and responsive browser review pass; baseline automation pending | HIGH | F-000, F-001 |
-| F-012 | S1 | P1 | Build mockup-aligned shared components | P0 | IN_REVIEW | 75% | REVIEW | Codex | Lint, types, build, and desktop/mobile browser review pass | HIGH | F-011 |
+| F-011 | S1 | P1 | Translate approved mockup into design tokens | P0 | DONE | 100% | DONE | Codex | User approved; coherent light/dark tokens verified across 24 baselines and all breakpoints | HIGH | F-000, F-001 |
+| F-012 | S1 | P1 | Build mockup-aligned shared components | P0 | DONE | 100% | DONE | Codex | User approved; shared patterns and explicit mobile/tablet Menu drawer pass 26 browser tests | HIGH | F-011 |
 | F-013 | S1 | P1 | Establish visual-regression workflow | P1 | DONE | 100% | DONE | Codex | 24/24 Playwright baselines pass across briefing, tracker, and editorial; light/dark at mobile, tablet, desktop, and large desktop | HIGH | F-011, F-012 |
-| F-015 | S1 | P1 | Living sprint tracker and agent handoff foundation | P0 | IN_REVIEW | 85% | REVIEW | Codex | Existing tracker shell and handoff pass responsive review | HIGH | F-000, F-001, F-011 |
-| F-016 | S1 | P1 | Markdown-synchronized delivery hierarchy | P0 | IN_REVIEW | 90% | REVIEW | Codex | Build-time Markdown parser and Sprint → Phase → Feature UI pass lint, type, tests, and build; automated visual capture pending | HIGH | F-001, F-015 |
+| F-015 | S1 | P1 | Living sprint tracker and agent handoff foundation | P0 | DONE | 100% | DONE | Codex | User approved; responsive shell, handoff, truthful demo states, and Menu drawer evidence complete | HIGH | F-000, F-001, F-011 |
+| F-016 | S1 | P1 | Markdown-synchronized delivery hierarchy | P0 | DONE | 100% | DONE | Codex | User approved; parser, hierarchy UI, build gates, 24 baselines, and responsive interaction evidence complete | HIGH | F-001, F-015 |
 | F-014 | S1 | P2 | Marketing homepage visual implementation | P0 | DISCOVERY | 10% | SCOPE | Unassigned | Responsive light/dark screenshots, E2E, and accessibility required | HIGH | F-011, F-012 |
 | F-017 | S1 | P2 | Marketing routes, legal shells, and SEO | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Required routes, metadata, canonicalization, and legal review required | HIGH | F-010, F-014 |
 | F-020 | S1 | P3 | Global/country/region feed architecture | P0 | NOT_STARTED | 0% | SCOPE | Unassigned | Configurable geography, unit, E2E, and fairness checks required | HIGH | F-010 |
@@ -254,6 +254,36 @@ Copy this section for each feature.
 - Migration/rollback: no migration; revert `lib/product.ts`, `app/layout.tsx`, the focused tests/config flag, and delivery-record updates.
 - Next approval required: review eligible Phase 1 items using F-013 evidence; do not begin F-014 without explicit Phase 2 approval.
 
+### F-011 Approved mockup design tokens
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P0 / HIGH
+- Status: DONE
+- Requested outcome: translate the approved mockup into one reusable semantic light/dark visual system.
+- Scope/evidence: centralized colors, typography, spacing, radii, elevation, focus, reduced motion, and status treatments in `app/globals.css`; shared across briefing, tracker, and editorial surfaces.
+- STABLE/mockup review: marketing, public-news, mobile, editorial-dashboard, and shared design-system panels compared in both themes at all four F-013 breakpoints.
+- Acceptance: 24 committed baselines and 26 browser tests pass; lint, types, six Node tests, and production build pass; user approved 2026-08-01.
+- Intentional deviations: CSS abstract artwork avoids unauthorized photography; real responsive layouts replace presentation-board proportions; WCAG and legibility override incidental sampled values.
+- Security/rights/editorial: no external assets or operational claims; demo labels remain explicit.
+- Accessibility/i18n/geographic fairness: visible focus, reduced motion, responsive containment, semantic theme contrast; no geography logic changed.
+- Migration/rollback: no migration; revert focused token rules and affected baselines.
+
+### F-012 Shared accessible components
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P0 / HIGH
+- Status: DONE
+- Requested outcome: establish consistent reusable navigation, card, badge, button, metric, panel, progress, and responsive interaction patterns.
+- Scope/evidence: current surfaces reuse shared CSS/component patterns; native controls, selected/pressed states, focus visibility, truthful demo states, touch sizing, mobile containment, and light/dark behavior verified.
+- Review finding/fix: user reported that mobile/tablet sidebar access was not visible. The ambiguous `N` opener was replaced by an explicit `☰ Menu` control with `aria-controls`/`aria-expanded`, an off-canvas drawer, close control, and dismissible backdrop.
+- Acceptance: user approved 2026-08-01 after the responsive issue; focused drawer tests pass at 390×844 and 768×1024; the full 26-case browser suite, lint, types, Node tests, and build pass.
+- Mockup/deviations: compact mobile header follows the mockup’s mobile navigation character while exposing a clearer labeled control for accessibility and discoverability.
+- Security/rights/editorial: no privileged behavior or live provider action introduced.
+- Accessibility/i18n/geographic fairness: explicit accessible names and relationships; keyboard/touch-operable drawer; English Menu label remains a documented Phase 12 localization concern; no geography logic changed.
+- Migration/rollback: no migration; revert the mobile Menu/backdrop rules and associated interaction tests/baselines.
+
 ### F-013 Visual-regression workflow
 
 - Phase / epic: Phase 1 foundation
@@ -297,10 +327,10 @@ Copy this section for each feature.
 - Phase / epic: Phase 1 foundation
 - Owner: Codex
 - Priority / risk: P0 / HIGH
-- Status: IN_REVIEW
+- Status: DONE
 - Requested outcome: first-pass app shell, MVP-important demo surfaces, organic sprint tracker UI, and living cross-agent handoff.
-- In scope: semantic product configuration, shared design tokens, light/dark responsive shell, demo briefing, editorial overview, visual sprint phases, completion rates, polling interaction, implementation steps, and documentation.
-- Out of scope: live markdown parsing, database persistence, authentication, ingestion, AI providers, real news, publishing, deployment, and progression into another delivery phase.
+- In scope: semantic product configuration, shared design tokens, light/dark responsive shell, demo briefing, editorial overview, Markdown-synchronized delivery hierarchy, explicit mobile/tablet Menu drawer, and living handoff documentation.
+- Out of scope: database persistence, authentication, ingestion, AI providers, real news, publishing, deployment, and progression into another delivery phase.
 
 #### STABLE record
 
@@ -314,27 +344,28 @@ Copy this section for each feature.
 #### Acceptance and verification
 
 - [x] Responsive app shell and three navigable first-pass surfaces.
-- [x] Tracker organised by sprint phase with completion bars, selected-sprint ring, implementation steps, polling status, and agent pulse.
+- [x] Tracker organised by sprint, phase, feature, progress, evidence, dependencies, risks, and STABLE checkpoint.
 - [x] Living `CLAUDE_HANDOFF.md` created with ownership, evidence, risks, rollback, queue, and update template.
 - [x] Light/dark theme interaction, desktop and mobile responsive review, semantic DOM snapshot, and browser console review (no warnings/errors).
 - [x] Lint: PASS — ESLint, 2026-08-01.
 - [x] Type check: PASS — strict TypeScript `--noEmit`, 2026-08-01.
 - [x] Tests: PASS — 2/2 Node rendered-shell/documentation tests, 2026-08-01.
 - [x] Production build: PASS — vinext/Vite, 2026-08-01.
-- [ ] Automated accessibility scanner and screen-reader manual pass — deferred to F-013/Phase 13 workflow; semantic and keyboard-focused review completed.
-- [ ] Live markdown synchronisation — deliberately deferred; the current UI states that it is a planning snapshot.
+- [x] Automated responsive interaction and visual regression — 26 browser tests, including explicit mobile/tablet drawer behavior.
+- [ ] Screen-reader manual certification — deferred to the later accessibility quality gate; semantic and keyboard-focused review completed.
 
 - Security/rights/editorial: no credentials, external calls, publisher marks, real reports, or publishing capabilities. All demo content and operational metrics are visibly fictional/non-live.
 - Accessibility/i18n/geographic fairness: WCAG-oriented semantics, focus, reduced motion, touch-sized controls, responsive layout; English copy only; geography visual explicitly separates commercial priority from editorial importance.
 - Migration/rollback: no data migration. Roll back by removing the generated application scaffold and reverting this tracker/handoff entry.
-- Next approval required: Phase 1 review or explicit approval for a named next tracker item; do not automatically advance to Phase 2, 3, or 5.
+- User acceptance: approved 2026-08-01 after the mobile Menu discoverability issue was corrected and verified.
+- Next approval required: formal Phase 1 closure decision; do not automatically advance to Phase 2, 3, or 5.
 
 ### F-016 Markdown-synchronized delivery hierarchy
 
 - Phase / epic: Phase 1 foundation
 - Owner: Codex
 - Priority / risk: P0 / HIGH
-- Status: IN_REVIEW
+- Status: DONE
 - Requested outcome: make the complete delivery plan visible as Sprint → Phase → Feature → implementation progress and keep the UI synchronized with this file.
 - In scope: canonical sprint and feature registers, strict build-time parsing, derived roll-up progress, responsive hierarchy navigation, feature evidence/dependency/risk detail, and STABLE checkpoints.
 - Out of scope: editing Markdown from the browser, database persistence, multi-user collaboration, notifications, and progression into another delivery phase.
@@ -345,7 +376,7 @@ Copy this section for each feature.
 - Scope/Think: audited the 15-phase Markdown roadmap and six-phase hard-coded UI; selected this file as the sole editable delivery source and the approved dashboard/design-system mockup panels as visual direction.
 - Assess Risk: fail builds on malformed tables, invalid statuses/progress/checkpoints, duplicate feature IDs, and unknown sprint/phase mappings; keep derived progress distinguishable from live operational data.
 - Build: added a watched Vite virtual module, strict parser/types, six sprint groups, all 15 phases, comprehensive feature rows, roll-up metrics, keyboard-operable selectors, semantic progress, light/dark tokens, and responsive layouts.
-- Validate/Review: ESLint, strict TypeScript, rendered-shell tests, and production build pass. Browser screenshot automation is unavailable in the current tool session, so final multi-breakpoint visual evidence remains open under F-013.
+- Validate/Review: ESLint, strict TypeScript, six Node tests, production build, 24 visual baselines, and 26 browser cases pass. User approved 2026-08-01 after mobile navigation discoverability was corrected.
 
 #### Acceptance and verification
 
@@ -358,12 +389,13 @@ Copy this section for each feature.
 - [x] Type check: PASS — strict TypeScript `--noEmit`, 2026-08-01.
 - [x] Tests: PASS — 2/2 Node rendered-shell/documentation tests, 2026-08-01.
 - [x] Production build: PASS — vinext/Vite, 2026-08-01.
-- [ ] Automated light/dark mobile/tablet/desktop screenshots — retained in F-013; browser-control capability unavailable in this session.
+- [x] Automated light/dark mobile/tablet/desktop screenshots — 24/24 baselines and non-mutating regression replay pass.
 
 - Security/rights/editorial: local Markdown only; no credentials, providers, publishing, external content, or authorization behavior added.
 - Accessibility/i18n/geographic fairness: native buttons, pressed states, labeled progress, visible focus inheritance, reduced-motion inheritance, responsive stacking; English-only tracker labels; no geographic ranking logic.
 - Migration/rollback: no data migration. Revert the parser/plugin/UI/register additions to restore the prior static tracker.
-- Next approval required: review F-016 and complete F-013 visual baselines; do not advance beyond the approved Phase 1 foundation.
+- User acceptance: approved 2026-08-01.
+- Next approval required: formal Phase 1 closure decision; do not advance beyond the approved Phase 1 foundation.
 
 ## Risk register
 
@@ -390,17 +422,17 @@ Copy this section for each feature.
 
 | Gate | Required command/tool | Last result | Date | Evidence | Blocking issues |
 |---|---|---|---|---|---|
-| Lint | Repository-defined | NOT_RUN | — | — | — |
-| Type check | Repository-defined | NOT_RUN | — | — | — |
-| Unit/component | Repository-defined | NOT_RUN | — | — | — |
+| Lint | `pnpm lint` | PASS | 2026-08-01 | ESLint | — |
+| Type check | `pnpm exec tsc --noEmit` | PASS | 2026-08-01 | Strict TypeScript | — |
+| Unit/component | `pnpm test` | PASS | 2026-08-01 | 6/6 Node tests | — |
 | Integration/E2E | Repository-defined | NOT_RUN | — | — | — |
 | Firebase Rules | Emulator/test suite | NOT_RUN | — | — | — |
 | Accessibility | Automated + manual | NOT_RUN | — | — | — |
 | Security | Review/tests | NOT_RUN | — | — | — |
-| Production build | Repository-defined | NOT_RUN | — | — | — |
-| Light-theme visual regression | Approved screenshots | NOT_RUN | — | — | — |
-| Dark-theme visual regression | Approved screenshots | NOT_RUN | — | — | — |
-| Responsive mockup comparison | Mobile/tablet/desktop | NOT_RUN | — | — | — |
+| Production build | `pnpm build` / `pnpm test` | PASS | 2026-08-01 | vinext/Vite production build | — |
+| Light-theme visual regression | `pnpm visual:test` | PASS | 2026-08-01 | 12 screenshot states plus drawer interactions | — |
+| Dark-theme visual regression | `pnpm visual:test` | PASS | 2026-08-01 | 12 screenshot states plus drawer interactions | — |
+| Responsive mockup comparison | Mobile/tablet/desktop/large desktop | PASS | 2026-08-01 | 24 baselines; 26 browser cases | — |
 
 ## Documentation tracker
 

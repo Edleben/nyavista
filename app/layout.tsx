@@ -36,5 +36,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang={product.internationalization.defaultLocale}><body>{children}</body></html>;
+  return <html lang={product.internationalization.defaultLocale} suppressHydrationWarning><body suppressHydrationWarning>{children}</body></html>;
 }
