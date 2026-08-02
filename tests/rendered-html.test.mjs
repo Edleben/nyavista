@@ -15,6 +15,11 @@ test("server-renders the NyaVista demo shell truthfully", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<title>NyaVista — Every story\. A clearer view\.<\/title>/i);
+  assert.match(html, /<html lang="en-US">/i);
+  assert.match(html, /name="robots" content="noindex, nofollow"/i);
+  assert.match(html, /name="publisher" content="E-DEAL EXPRESS LLC"/i);
+  assert.match(html, /property="og:locale" content="en_US"/i);
+  assert.match(html, /name="theme-color" content="#031b2d" media="\(prefers-color-scheme: dark\)"/i);
   assert.match(html, /Demo content/i);
   assert.match(html, /not live reporting/i);
   assert.match(html, /Global intelligence briefing/);

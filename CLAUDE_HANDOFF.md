@@ -20,7 +20,7 @@ Required fields for every implementation entry:
 | Field | Current value |
 |---|---|
 | Approved work | Phase 0 audit plus Phase 1 first-pass foundation |
-| Active tracker IDs | F-001, F-010, F-011, F-012, F-015, F-016; F-013 complete |
+| Active tracker IDs | F-001, F-011, F-012, F-015, F-016; F-010 and F-013 complete |
 | Active agent | Codex |
 | STABLE reference | `STABLE_FRAMEWORK.md` at commit `f8ab99e` |
 | UI reference | `docs/design/nyavista-ui-mockup-light-dark.png` |
@@ -48,7 +48,7 @@ Required fields for every implementation entry:
 | Priority | Tracker ID | Next action | Required evidence | Owner |
 |---|---|---|---|---|
 | P0 | F-016 | Review the Markdown-synchronized hierarchy using completed F-013 evidence | Acceptance review and closure decision | Unassigned |
-| P0 | F-010 | Expand central configuration into metadata and locale helpers | Unit/render checks | Unassigned |
+| P0 | F-010 | Review completed identity, metadata, and locale evidence | Acceptance review and closure confirmation | Unassigned |
 | P1 | F-014 | Implement full marketing route only after Phase 2 approval | Responsive and accessibility evidence | Unassigned |
 
 ### 2026-08-01 — Codex — F-013
@@ -64,6 +64,19 @@ Required fields for every implementation entry:
 - Truthfulness/security/rights: demo-only fictional content; no providers, publishing, credentials, personal information, or publisher assets introduced.
 - Rollback: remove Playwright configuration/tests/baselines and revert the narrow tracker containment rules; no migration exists.
 - Next safe action: review F-011/F-012/F-015/F-016 against F-013 evidence, then complete F-010 metadata/locale helpers. Do not start F-014 without explicit Phase 2 approval.
+
+### 2026-08-01 — Codex — F-010
+
+- Outcome: completed the typed central product configuration, truthful root metadata, initial-market/editorial separation, locale resolution, UTC policy, and locale-aware formatting helpers.
+- Scope: identity/ownership/positioning; demo disclosure and no-index metadata; Open Graph/Twitter metadata without invented origin or imagery; responsive theme-color metadata; five initial BCP 47 English locales and ISO country codes; safe locale fallback; `Intl` date/time, number, and currency helpers.
+- Excluded: production canonical URL, `hreflang`, localized routes, translations, geolocation, user preference persistence, social handles, contacts, sitemap, and Phase 2 marketing work.
+- STABLE: root framework baseline `f902b9d`; product specification, constraints, tracker, README, current boundaries, Next.js skill, and metadata guidance reviewed; scope/acceptance/risks recorded before implementation; server metadata and pure configuration responsibilities kept separate.
+- Files: `lib/product.ts`, `app/layout.tsx`, `tests/product-config.test.ts`, `tests/rendered-html.test.mjs`, `package.json`, `tsconfig.json`, `PRODUCT_TRACKER.md`, `CLAUDE_HANDOFF.md`.
+- Verification: ESLint PASS; strict TypeScript PASS; 6/6 Node tests PASS; production build PASS; rendered HTML metadata verified; 24/24 Playwright visual regressions PASS.
+- Truthfulness/security/rights: the demo is `noindex, nofollow`; no production domain, contact, social account, translation, provider, personal data, or external media was invented.
+- Accessibility/i18n/geographic fairness: `lang=en-US`, BCP 47 supported locales, UTC canonical default, explicit timezone override, `Intl` formatting, deterministic unsupported-locale fallback, and a typed rule that commercial priority does not affect editorial importance.
+- Rollback: revert the focused configuration/layout/tests/compiler-option and delivery-record changes; no migration exists.
+- Next safe action: acceptance review for F-010 and the remaining Phase 1 review items. Do not start F-014 without explicit Phase 2 approval.
 
 ### 2026-08-01 — Codex — F-016
 

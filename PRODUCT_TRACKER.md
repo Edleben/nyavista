@@ -32,7 +32,7 @@ This file is the delivery source of truth. Update it after evidence exists, not 
 | Visual baseline status | PASS — 24 Playwright baselines across 3 surfaces, 2 themes, and 4 breakpoints |
 | Highest open risk | First pass is demo-only; persistence, authentication, ingestion, AI, and publishing are not live |
 | Build | PASS — `vinext build` (2026-08-01) |
-| Tests | PASS — 3/3 Node tests and 24/24 Playwright visual tests (2026-08-01) |
+| Tests | PASS — 6/6 Node tests and 24/24 Playwright visual tests (2026-08-01) |
 | Security review | NOT_STARTED |
 | Accessibility review | IN_REVIEW — semantic DOM, keyboard focus, responsive navigation, reduced motion |
 | Legal/editorial review | NOT_STARTED |
@@ -67,7 +67,7 @@ Create one row per independently testable outcome. Split rows that require diffe
 | F-002 | 0 | Repository ignore and branch-governance hardening | P1 | DONE | Codex | `STABLE_FRAMEWORK.md` reviewed; generated/local artifact audit performed on `feature/nyavista_cedi_app` at `f902b9d`; GitHub ruleset `20211916` verified active | Generated dependencies, build output, caches, logs, editor state, OS metadata, and secrets stay out of Git; sanitized environment templates remain committable; `main` accepts changes only through PRs | `git status --ignored`, tracked-artifact scan, `git check-ignore`; active GitHub ruleset applies to `main`, requires PRs, restricts deletion, blocks force pushes, and has an empty bypass list | MEDIUM | F-000, F-001, GitHub admin access | `.gitignore`, repository settings | Working tree; `https://github.com/ceditech/nyavista/settings/rules/20211916` |
 | F-000 | 0 | Locate and map root STABLE framework | P0 | NOT_STARTED | — | — | Complete framework read; workflow mapped; no invented rules | Path/version and review note | CRITICAL | Repository access | Constraints/specs | — |
 | F-001 | 0 | Repository audit | P0 | NOT_STARTED | — | — | Current architecture, changes, dependencies and gaps documented | Audit report | HIGH | F-000 | Architecture | — |
-| F-010 | 1 | Central brand/company configuration | P0 | NOT_STARTED | — | — | US ownership and global positioning have one source of truth | Unit/render checks | MEDIUM | F-001 | Brand/ownership | — |
+| F-010 | 1 | Central brand/company configuration | P0 | DONE | Codex | Root STABLE, product specification, constraints, and Next.js metadata guidance reviewed; complete STABLE record below | Ownership, global positioning, demo metadata, commercial markets, locale resolution, UTC storage guidance, and locale-aware formatters have one typed source | 6/6 Node tests, lint, types, build, rendered metadata, and 24/24 visual regressions PASS | MEDIUM | F-001 | Brand/ownership, metadata, locale helpers | Working tree |
 | F-011 | 1 | Translate approved mockup into design tokens | P0 | NOT_STARTED | — | — | Light/dark colors, typography, spacing, radii, elevation and states are centralized | Token/unit/visual checks | HIGH | F-000, F-001 | Components/design system | — |
 | F-012 | 1 | Build mockup-aligned shared components | P0 | NOT_STARTED | — | — | Cards, chips, buttons, badges, navigation and media controls match baseline accessibly | Component/visual/a11y checks | HIGH | F-011 | Components | — |
 | F-013 | 1 | Establish visual-regression workflow | P1 | DONE | Codex | Root STABLE and approved mockup reviewed; Playwright workflow exercises navigation, themes, error states, overflow, and screenshots | Stable screenshots cover all current surfaces, both themes, and four agreed breakpoints | 24/24 visual tests PASS; 24 committed PNG baselines; mobile tracker overflow found and corrected | HIGH | F-011, F-012 | `playwright.config.ts`, `tests/visual-regression.spec.ts`, baseline README | Working tree |
@@ -106,7 +106,7 @@ This is the canonical source for the Project Tracker UI. Sprints group phases fo
 | F-000 | S0 | P0 | Locate and map root STABLE framework | P0 | DONE | 100% | DONE | Codex | Root framework and required references reviewed; workflow mapped | CRITICAL | Repository access |
 | F-001 | S0 | P0 | Repository audit and architecture baseline | P0 | IN_PROGRESS | 55% | BUILD | Codex | Repository, branch, runtime, build, risks, and UI audit evidence | HIGH | F-000 |
 | F-002 | S0 | P0 | Repository ignore and branch-governance hardening | P1 | DONE | 100% | DONE | Codex | Ignore audit and active GitHub ruleset 20211916 | MEDIUM | F-000, F-001 |
-| F-010 | S1 | P1 | Central brand/company configuration | P0 | IN_PROGRESS | 60% | BUILD | Codex | Central identity exists; metadata and locale helpers remain | MEDIUM | F-001 |
+| F-010 | S1 | P1 | Central brand/company configuration | P0 | DONE | 100% | DONE | Codex | Typed identity, no-index demo metadata, commercial/editorial separation, locale fallback, UTC policy, Intl formatters, and all verification gates pass | MEDIUM | F-001 |
 | F-011 | S1 | P1 | Translate approved mockup into design tokens | P0 | IN_REVIEW | 80% | REVIEW | Codex | Token and responsive browser review pass; baseline automation pending | HIGH | F-000, F-001 |
 | F-012 | S1 | P1 | Build mockup-aligned shared components | P0 | IN_REVIEW | 75% | REVIEW | Codex | Lint, types, build, and desktop/mobile browser review pass | HIGH | F-011 |
 | F-013 | S1 | P1 | Establish visual-regression workflow | P1 | DONE | 100% | DONE | Codex | 24/24 Playwright baselines pass across briefing, tracker, and editorial; light/dark at mobile, tablet, desktop, and large desktop | HIGH | F-011, F-012 |
@@ -207,6 +207,52 @@ Copy this section for each feature.
 - Commit/PR:
 - Reviewer/approval/date:
 ```
+
+### F-010 Central brand, metadata, and locale configuration
+
+- Phase / epic: Phase 1 foundation
+- Owner: Codex
+- Priority / risk: P0 / MEDIUM
+- Status: DONE
+- Requested outcome: finish the central product configuration so identity, demo metadata, initial commercial markets, locale defaults, timezone policy, and locale-aware formatting do not drift across future features.
+- In scope: typed immutable product configuration; Next.js root metadata derived from it; truthful no-index demo metadata; ISO initial-market and locale identifiers; supported-locale resolution; locale-aware date/time, number, and currency helpers; UTC canonical-storage guidance; focused unit/render/visual regression tests.
+- Out of scope: localized routes, translations, geolocation, user locale persistence, `hreflang`, production canonical URL, sitemap, legal contact values, social handles, runtime market ranking, and Phase 2 marketing implementation.
+- Dependencies: F-001; existing `lib/product.ts` and server `app/layout.tsx` boundary.
+- Data/schema/migration impact: none.
+- Provider/environment impact: none; no production origin is invented.
+- Rights/privacy/security impact: no personal information or external assets; demo remains non-indexable.
+- Accessibility/localization/geographic-fairness impact: helpers use `Intl`; unsupported locales fall back deterministically; commercial market order remains explicitly separate from editorial importance.
+- Mockup panel(s) used: shared design-system/global shell only; no visual redesign planned.
+- Visual baseline: existing 24-image F-013 matrix; update only if rendered metadata/configuration changes pixels.
+- Required themes/breakpoints: regression replay across both themes and all four established breakpoints.
+
+#### STABLE record
+
+- Framework path and version/commit: `STABLE_FRAMEWORK.md`, repository baseline commit `f902b9d`.
+- Pre-coding: required repository instructions, product specification, constraints, tracker, README, current configuration/layout/tests, Next.js skill, and metadata reference reviewed; scope, exclusions, risks, acceptance, test plan, and rollback recorded here before implementation.
+- Risks/tests: prevent invented production URLs/contact details; prevent commercial priorities from becoming editorial weights; preserve existing title/description and visuals; test supported/unsupported locale resolution, UTC and explicit timezone formatting, locale-specific numbers/currency, rendered metadata, lint, types, build, and F-013 replay.
+- Rollback: revert the focused product/configuration, layout metadata, tests, tracker, and handoff changes; no migration.
+
+#### Acceptance criteria
+
+- [x] Product identity, ownership, positioning, demo disclosure, metadata, commercial markets, locales, and timezone policy are centralized and typed.
+- [x] Root metadata is derived from configuration and truthfully prevents indexing of the demo.
+- [x] Locale helpers validate/fallback safely and format dates, numbers, and currencies with standard `Intl` behavior.
+- [x] Initial market configuration cannot be mistaken for editorial weighting.
+- [x] No production origin, contact, social handle, translation, or provider capability is invented.
+- [x] Unit/render/static/build/visual gates pass and both delivery records are synchronized.
+
+#### Delivery evidence
+
+- Implementation: immutable typed configuration in `lib/product.ts`; server-only Next.js metadata/viewport export in `app/layout.tsx`; isolated locale/config unit tests in `tests/product-config.test.ts`.
+- Rendered metadata: `lang=en-US`, truthful description, E-DEAL EXPRESS LLC publisher, `noindex, nofollow`, `og:locale=en_US`, and light/dark theme colors verified in server HTML.
+- Test/build results: ESLint PASS; strict TypeScript PASS; 6/6 Node tests PASS; vinext/Vite production build PASS; 24/24 non-mutating Playwright visual regressions PASS.
+- Known limitations: English variants only; user locale/timezone persistence, translation, localized routes, `hreflang`, canonical production origin, sitemap, social/contact values, and cross-browser locale rendering remain future approved work.
+- Visual comparison/deviations: no intended pixel changes; all existing approved F-013 baselines pass unchanged before tracker completion data is applied.
+- Security/rights/editorial: demo is explicitly non-indexable; no invented URLs, contacts, accounts, providers, personal data, or external assets; commercial markets cannot affect editorial importance through this configuration.
+- Accessibility/i18n/geographic fairness: BCP 47 locale identifiers, deterministic fallback, UTC default, explicit timezone override, standard `Intl` behavior, country-neutral policy, and no special-case geography ranking.
+- Migration/rollback: no migration; revert `lib/product.ts`, `app/layout.tsx`, the focused tests/config flag, and delivery-record updates.
+- Next approval required: review eligible Phase 1 items using F-013 evidence; do not begin F-014 without explicit Phase 2 approval.
 
 ### F-013 Visual-regression workflow
 
